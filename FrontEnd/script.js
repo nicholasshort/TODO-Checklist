@@ -18,8 +18,8 @@ function finishTask(buttonId) {
     callBackEnd(buttonId);
 }
 
-const url = "http://127.0.0.1:5000/api/status";
-// const url = "http://172.105.3.93:5000/api/status";
+//const url = "http://127.0.0.1:5000/api/status";
+const url = "http://172.105.3.93:5000/api/status";
 
 function callBackEnd(buttonPressed) {
     var currentDate = new Date();

@@ -13,7 +13,7 @@ def insertRow(date):
     cursor = connection.cursor()
 
     insert_query = """
-        INSERT INTO daily_activities (date, gym, ticket, errand)
+        INSERT INTO daily_activities (activity_date, gym, ticket, errand)
         VALUES (%s, %s, %s, %s)
     """
 
@@ -106,7 +106,8 @@ def getRowFromDate(date):
         print(row)
     else:
         print('No row found for the given date')
-        row = insertRow(date)
+        insertRow(date)
+        row = getRowFromDate(date)
 
     cursor.close()
     connection.close()
