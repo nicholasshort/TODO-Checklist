@@ -59,12 +59,13 @@ def updateRowFromDate(date, task, complete):
     """
     num_rows = -1
     if task == "fitnessButton":
-        num_rows = cursor.execute(update_gym_query, (complete, date_value))
+        cursor.execute(update_gym_query, (complete, date))
     elif task == "ticketButton":
-        num_rows = cursor.execute(update_ticket_query, (complete, date_value))
+        cursor.execute(update_ticket_query, (complete, date))
     elif task == "errandButton":
-        num_rows = cursor.execute(update_errand_query, (complete, date_value))
+        cursor.execute(update_errand_query, (complete, date))
 
+    num_rows = cursor.rowcount
     connection.commit()
 
     if num_rows > 0:
