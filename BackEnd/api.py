@@ -21,12 +21,12 @@ def handle_post_request():
     elif request.method == "OPTIONS":
         return response
 
-@app.route("/api/update", methods=["GET", "OPTIONS"])
-def handle_post_request():
+@app.route("/api/status", methods=["GET", "OPTIONS"])
+def handle_get_request():
     response = get_headers()
-    if request.method == "POST":
-        data = json.loads(request.data.decode('utf-8'))
-        getRowFromDate(data["date"])
+    if request.method == "GET":
+        data = dict(request.headers)
+        getRowFromDate(data["Current-Date"])
         return response
     elif request.method == "OPTIONS":
         return response

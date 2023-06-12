@@ -18,17 +18,17 @@ function finishTask(buttonId) {
     callBackEnd(buttonId);
 }
 
-const url = "http://127.0.0.1:5000/api/update";
-//const url = "http://172.105.3.93:5000/api/update";
+const url = "http://127.0.0.1:5000/api/status";
+// const url = "http://172.105.3.93:5000/api/update";
 
 function callBackEnd(buttonPressed) {
     fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Current-Date': '2023-06-11'
         },
         // body: JSON.stringify({"task": buttonPressed, "complete": true})
-        body: JSON.stringify({"date": "2023-06-11"})
     }).then(response => response.json()).then(data => {
         // Handle the response data
         console.log("Made contact!!");
