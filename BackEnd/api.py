@@ -13,7 +13,7 @@ def get_headers():
 
 @app.route("/api/update", methods=["POST", "OPTIONS"])
 def handle_post_request():
-    reponse = get_headers()
+    response = get_headers()
     if request.method == "POST":
         body_data = json.loads(request.data.decode('utf-8'))
         header_data = dict(request.headers)
