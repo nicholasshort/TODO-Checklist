@@ -29,8 +29,9 @@ def handle_get_request():
         header_data = dict(request.headers)
         keys = ['date', 'gym', 'ticket', 'errand']
         row = getRowFromDate(header_data["Current-Date"])
-        row[0] = row[0].isoformat() # convert date object to string 
-        response.data = json.dumps(dict(zip(keys, row)))
+        string_date = row[0].isoformat() # convert date object to string 
+        new_row = (string_date,) + row[1:]
+        response.data = json.dumps(dict(zip(keys, new_row)))
         return response
     elif request.method == "OPTIONS":
         return response
