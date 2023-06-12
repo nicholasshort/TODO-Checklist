@@ -18,7 +18,6 @@ function showTaskStatus() {
 }
 
 
-
 function updateTask(buttonId) {
     var textId = "";
     var complete = false;
@@ -65,12 +64,8 @@ function callBackEnd() {
             throw new Error('Request failed with status ' + response.status);
         }
     }).then(data => {
-        // Handle the response data
-        console.log("Made contact!!");
-        //console.log(data);
         return data
     }).catch(error => {
-        // Handle any errors
         console.error('Error:', error);
         throw error;
     });
@@ -88,12 +83,9 @@ function updateBackEnd(buttonPressed, complete) {
           'Current-Date': formattedDate
         },
         body: JSON.stringify({"task": buttonPressed, "complete": complete})
-    }).then(response => response.json()).then(data => {
-        // Handle the response data
-        console.log("Made contact!!");
-        console.log(data);
+    }).then(response => {
+        console.log(response);
     }).catch(error => {
-        // Handle any errors
         console.error('Error:', error);
     });
 }
