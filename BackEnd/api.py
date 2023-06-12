@@ -15,8 +15,9 @@ def get_headers():
 def handle_post_request():
     reponse = get_headers()
     if request.method == "POST":
-        data = json.loads(request.data.decode('utf-8'))
-        updateTable(data["task"], data["complete"])
+        body_data = json.loads(request.data.decode('utf-8'))
+        header_data = dict(request.headers)
+        updateRowFromDate(header_data["Current-Date"], body_data["task"], body_data["complete"])
         return response
     elif request.method == "OPTIONS":
         return response
@@ -25,8 +26,9 @@ def handle_post_request():
 def handle_get_request():
     response = get_headers()
     if request.method == "GET":
-        data = dict(request.headers)
-        getRowFromDate(data["Current-Date"])
+        header_data = dict(request.headers)
+        keys = ['date', 'gym', 'ticket', 'errand']
+        response.data = json.dumps(dict(zip(keys, getRowFromDate(header_data["Current-Date"]))))
         return response
     elif request.method == "OPTIONS":
         return response
