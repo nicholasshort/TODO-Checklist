@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, send_file
 from db import *
 import json
 
@@ -10,6 +10,20 @@ def get_headers():
     response.headers.add("Access-Control-Allow-Headers", "*")
     response.headers.add("Access-Control-Allow-Methods", "*")
     return response
+
+@app.route("/todo", methods=["GET", "OPTIONS"])
+def get_home_page():
+
+    if request.method == "GET":
+        home_page = send_file("../FrontEnd/index.html")
+        response = make_response(home_page)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "*")
+        return response
+        
+    elif request.method == "OPTIONS":
+        return get_headers()
 
 @app.route("/api/update", methods=["POST", "OPTIONS"])
 def handle_post_request():
