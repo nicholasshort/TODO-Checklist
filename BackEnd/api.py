@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, send_file
+from flask import Flask, request, make_response, send_file, send_from_directory
 from db import *
 import json
 
@@ -13,7 +13,6 @@ def get_headers():
 
 @app.route("/todo", methods=["GET", "OPTIONS"])
 def get_home_page():
-
     if request.method == "GET":
         home_page = send_file("../FrontEnd/index.html")
         response = make_response(home_page)
@@ -21,7 +20,17 @@ def get_home_page():
         response.headers.add("Access-Control-Allow-Headers", "*")
         response.headers.add("Access-Control-Allow-Methods", "*")
         return response
-        
+    elif request.method == "OPTIONS":
+        return get_headers()
+
+@app.route("/<path:filename>", methods=["GET", "OPTIONS"])
+def static_files(filename):
+    if request.method == "GET":
+        response = send_from_directory("../FrontEnd/", filename)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "*")
+        return response
     elif request.method == "OPTIONS":
         return get_headers()
 
