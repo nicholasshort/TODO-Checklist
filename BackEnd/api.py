@@ -60,5 +60,4 @@ def handle_get_request():
         return response
 
 if __name__ == "__main__":
-    app.run()
-    # app.run(host="172.105.3.93")
+    app.run(host="0.0.0.0")
